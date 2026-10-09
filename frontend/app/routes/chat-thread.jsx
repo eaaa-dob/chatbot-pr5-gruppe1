@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useParams } from "react-router";
 import { ChatMessages, ChatInput } from "../components/Chat.jsx";
+import { useLoaderData } from "react-router";
 
 /**
  * INITIAL THREAD MESSAGES DATA
@@ -21,6 +21,28 @@ const defaultMessages = [
   },
 ];
 
+export async function clientLoader({ params }) {
+  const {threadId} = params;
+  console.log("ChatThread Loader: Start", threadId);
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  console.log("ChatThread Loader: End", threadId);
+  return{
+    threadId,
+    messages:[
+      {
+        id:1,
+        type:"user",
+        content:"Hej med dig"
+      },
+      {
+        id:2,
+        type:"bot",
+        content:"Hej tilbage, fra bot"
+      }
+    ]
+  }
+}
+
 /**
  * Chat Thread Route Component
  *
@@ -33,9 +55,8 @@ const defaultMessages = [
  */
 export default function ChatThread() {
   // Extract the threadId from the URL using useParams()
-  const { threadId } = useParams();
+  const { threadId, messages } = useLoaderData();
 
-  const [messages, setMessages] = useState(defaultMessages);
 
   const addMessage = (content) => {
     const newMessage = {
@@ -45,6 +66,8 @@ export default function ChatThread() {
     };
 
     setMessages([...messages, newMessage]);
+    console.log("New message added:", content);
+    console.log("Data mutation here later");
   };
 
   return (

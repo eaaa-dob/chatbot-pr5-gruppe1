@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import { useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
+import { useLoaderData } from "react-router";
 
 /**
  * INITIAL DATA FOR STATE
@@ -74,9 +75,120 @@ const initialThreads = [
  * 4. DATA FLOW: State updates flow up, data flows down
  * 5. COMPONENT COMMUNICATION: Parent-child communication via callbacks
  */
+
+  export async function clientLoader() {
+  await new Promise((resolve) => setTimeout(resolve, 300));
+  console.log("clientLoader called");
+  return [
+      {
+        id:1,
+        title:"skibo?"
+        
+      },
+      {
+        id:2,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:3,
+        title:"asdasd?"
+        
+      },
+      {
+        id:4,
+        title:"id4 is here?"
+        
+      },
+      {
+        id:5,
+        title:"this is id 5?"
+        
+      },
+      {
+        id:6,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:7,
+        title:"skibo?"
+        
+      },
+      {
+        id:8,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:9,
+        title:"skibo?"
+        
+      },
+      {
+        id:10,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:11,
+        title:"skibo?"
+        
+      },
+      {
+        id:12,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:13,
+        title:"skibo?"
+        
+      },
+      {
+        id:14,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:15,
+        title:"skibo?"
+        
+      },
+      {
+        id:16,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:17,
+        title:"skibo?"
+        
+      },
+      {
+        id:18,
+        title:"Whasdasdasd?"
+        
+      },
+      {
+        id:19,
+        title:"skibo?"
+        
+      },
+      {
+        id:20,
+        title:"Whasdasdasd?"
+        
+      }
+    ];
+  }
+
+
+
 export default function Layout() {
   // STATE: threads is now dynamic data that can change!
-  const [threads, setThreads] = useState(initialThreads);
+  const threads = useLoaderData();
+  
 
   // CALLBACK FUNCTION: Handle deleting a thread by ID
   const deleteThread = (threadId) => {
