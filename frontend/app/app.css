@@ -162,6 +162,24 @@ body {
   white-space: nowrap;
 }
 
+.chat-thread-link-active {
+  font-weight: bold;
+}
+
+@keyframes pulse{
+0%, 
+100%{
+  color: var(--text-primary)
+}
+50%{
+  color: var(--text-muted)
+}
+}
+
+.chat-thread-link-pending{
+  animation: pulse 0.6s ease-in-out infinite
+}
+
 /* Delete button - hidden by default, shown on hover */
 .delete-thread-btn {
   background: transparent;

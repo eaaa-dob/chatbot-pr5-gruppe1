@@ -65,10 +65,14 @@ function ChatThreadItem({ thread, onDeleteThread }) {
       <div className="chat-thread-item-content">
         <NavLink
           to={href("/chat/:threadId", { threadId: id })}
-          className={({isActive}) =>
-          isActive
-            ? "chat-thread-link chat-thread-link-active"
-            : "chat-thread-link"
+          className={({isActive, isPending }) =>
+          [
+            "chat-thread-link",
+            isActive && "chat-thread-link-active",
+            isPending && "chat-thread-link-pending",
+          ]
+          .filter(Boolean)
+          .join(" ")
         }
         >
           {title}
